@@ -2,3 +2,5 @@
 
 ansible_become: true
 tmp_dir: /tmp
+# 'ad', 'mit', or 'none' to disable security
+krb5_kdc_type: none

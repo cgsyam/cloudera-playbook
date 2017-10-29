@@ -2,5 +2,6 @@
 *.so
 *.iml
 .idea/
+.vagrant/
 .DS_Store
 site.retry

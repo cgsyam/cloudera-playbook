@@ -1,13 +1,15 @@
 # Note for AWS: 'Public DNS' name is too long for ansible_host, use 'Public IP' (https://github.com/ansible/ansible/issues/11536)
+[localhost]
+localhost  ansible_connection=local ansible_become=false
 
 [scm_server]
-<host>        license_file=/path/to/cloudera_license.txt
+node-1.hadoop.com        license_file=/path/to/cloudera_license.txt
 
 [db_server]
-<host>
+node-1.hadoop.com
 
 [krb5_server]
-<host>        default_realm=CLOUDERA.COM
+node-2.hadoop.com        default_realm=CLOUDERA.COM
 
 [utility_servers:children]
 scm_server
@@ -15,17 +17,17 @@ db_server
 krb5_server
 
 [gateway_servers]
-<host>        host_template=HostTemplate-Gateway role_ref_names=HDFS-HTTPFS-1
+node-3.hadoop.com        host_template=HostTemplate-Gateway role_ref_names=HDFS-HTTPFS-1
 
 [master_servers]
-<host>        host_template=HostTemplate-Master1
-<host>        host_template=HostTemplate-Master2
-<host>        host_template=HostTemplate-Master3
+node-1.hadoop.com        host_template=HostTemplate-Master1
+node-2.hadoop.com        host_template=HostTemplate-Master2
+node-3.hadoop.com        host_template=HostTemplate-Master3
 
 [worker_servers]
-<host>
-<host>
-<host>
+node-2.hadoop.com
+node-3.hadoop.com
+node-4.hadoop.com
 
 [worker_servers:vars]
 host_template=HostTemplate-Workers
@@ -37,4 +39,4 @@ master_servers
 worker_servers
 
 [all:vars]
-ansible_user=ec2-user
+ansible_user=vagrant

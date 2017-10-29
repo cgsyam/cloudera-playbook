@@ -19,6 +19,12 @@
     - java
   tags: java
 
+- name: Disable selinux
+  hosts: cdh_servers
+  roles:
+    - selinux
+  tags: selinux
+
 - name: Install MariaDB and create databases
   hosts: db_server
   roles:
@@ -60,4 +66,3 @@
   roles:
     - cdh
   tags: cluster_template
-
